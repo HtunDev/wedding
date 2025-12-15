@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1700000000001,
+    "name": "Sarah Johnson",
+    "position": "Frontend Developer",
+    "message": "Congratulations Pradeep and Theingi! Wishing you both a lifetime of love, laughter, and happiness together. May your journey be filled with beautiful moments and endless joy!",
+    "visible": true
+  },
+  {
+    "id": 1700000000002,
+    "name": "Michael Chen",
+    "position": "Backend Developer",
+    "message": "So happy for you both! Your love story is truly inspiring. May your marriage be blessed with harmony, understanding, and countless adventures together.",
+    "visible": true
+  },
+  {
+    "id": 1700000000003,
+    "name": "Emily Rodriguez",
+    "position": "UI/UX Designer",
+    "message": "Congratulations on your special day! Wishing you a beautiful life together filled with love, dreams, and wonderful memories. Enjoy every moment!",
+    "visible": true
+  }
+]
