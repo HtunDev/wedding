@@ -65,7 +65,7 @@ export default function AddWish() {
       </Head>
       <div className="container">
         <div className="form-container">
-          <Link href="/wishes" className="back-button">
+          <Link href="/wishes" className="back-pill">
             <span>← Back to Wishes</span>
           </Link>
           <h1>Send Your Wish</h1>
@@ -135,27 +135,7 @@ export default function AddWish() {
           box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
           position: relative;
         }
-        .back-button {
-          display: inline-block;
-          padding: 12px 24px;
-          background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-          color: #475569;
-          text-decoration: none;
-          border-radius: 10px;
-          font-size: 14px;
-          font-weight: 600;
-          margin-bottom: 32px;
-          transition: all 0.3s ease;
-          border: 2px solid #e2e8f0;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-        .back-button:hover {
-          background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-          color: #1e293b;
-          border-color: #cbd5e1;
-          transform: translateX(-3px);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+        /* back button now uses global .back-pill style from _app.js */
         h1 {
           margin: 0 0 30px;
           padding-top: 20px;

@@ -85,8 +85,28 @@ export default function Wishes() {
           </svg>
         </div>
         <div className="phone">
+          {/* Extra hearts inside phone for mobile view */}
+          <div className="phone-hearts">
+            <svg className="phone-heart phone-heart-1" viewBox="0 0 24 24" fill="url(#gradient1)">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            <svg className="phone-heart phone-heart-2" viewBox="0 0 24 24" fill="url(#gradient2)">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            <svg className="phone-heart phone-heart-3" viewBox="0 0 24 24" fill="url(#gradient1)">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            <svg className="phone-heart phone-heart-4" viewBox="0 0 24 24" fill="url(#gradient2)">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
           <div className="header">
             <div className="header-content">
+              <div className="back-row">
+                <Link href="/" className="back-pill">
+                  <span>← Back</span>
+                </Link>
+              </div>
               <div className="badge-wrapper">
                 <div className="couple-icon">
                   <svg viewBox="0 0 120 120" className="couple-svg">
@@ -356,58 +376,85 @@ export default function Wishes() {
           fill: url(#gradient2);
         }
         @media (max-width: 768px) {
+          .phone-hearts {
+            display: block;
+          }
+          /* make hearts more visible and use falling animation on mobile */
           .heart-svg {
-            opacity: 0.15;
+            opacity: 0.25;
+            width: 80px;
+            height: 80px;
+            animation: heartFall 10s linear infinite;
+          }
+          .phone-heart {
+            opacity: 0.3;
             width: 70px;
             height: 70px;
+            animation: heartFall 8s linear infinite;
           }
           .heart-svg:nth-child(1) {
-            top: 8%;
-            left: 3%;
-            width: 60px;
-            height: 60px;
+            top: 6%;
+            left: 5%;
+            width: 70px;
+            height: 70px;
           }
           .heart-svg:nth-child(2) {
             top: 18%;
-            right: 2%;
+            right: 4%;
+            width: 80px;
+            height: 80px;
+          }
+          .heart-svg:nth-child(3) {
+            top: 40%;
+            left: 3%;
             width: 70px;
             height: 70px;
           }
-          .heart-svg:nth-child(3) {
-            top: 45%;
-            left: 2%;
-            width: 55px;
-            height: 55px;
-          }
           .heart-svg:nth-child(4) {
-            top: 55%;
+            top: 50%;
+            right: 4%;
+            width: 85px;
+            height: 85px;
+          }
+          .heart-svg:nth-child(5) {
+            top: 14%;
+            left: 45%;
+            width: 65px;
+            height: 65px;
+          }
+          .heart-svg:nth-child(6) {
+            top: 72%;
+            left: 10%;
+            width: 70px;
+            height: 70px;
+          }
+          .heart-svg:nth-child(7) {
+            top: 32%;
             right: 3%;
             width: 75px;
             height: 75px;
           }
-          .heart-svg:nth-child(5) {
-            top: 12%;
-            left: 45%;
-            width: 50px;
-            height: 50px;
-          }
-          .heart-svg:nth-child(6) {
-            top: 75%;
-            left: 10%;
-            width: 60px;
-            height: 60px;
-          }
-          .heart-svg:nth-child(7) {
-            top: 30%;
-            right: 1%;
-            width: 65px;
-            height: 65px;
-          }
           .heart-svg:nth-child(8) {
-            top: 70%;
-            right: 4%;
-            width: 70px;
-            height: 70px;
+            top: 68%;
+            right: 6%;
+            width: 80px;
+            height: 80px;
+          }
+          @keyframes heartFall {
+            0% {
+              transform: translateY(-20%) translateX(0) rotate(0deg);
+              opacity: 0;
+            }
+            20% {
+              opacity: 0.22;
+            }
+            80% {
+              opacity: 0.22;
+            }
+            100% {
+              transform: translateY(130%) translateX(-10px) rotate(10deg);
+              opacity: 0;
+            }
           }
         }
         @keyframes float {
@@ -453,6 +500,41 @@ export default function Wishes() {
           position: relative;
           z-index: 1;
         }
+        .phone-hearts {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          z-index: 0;
+          display: none;
+        }
+        .phone-heart {
+          position: absolute;
+          width: 70px;
+          height: 70px;
+          opacity: 0.18;
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+          animation: float 14s ease-in-out infinite;
+        }
+        .phone-heart-1 {
+          top: 16%;
+          left: 6%;
+          animation-delay: 0s;
+        }
+        .phone-heart-2 {
+          top: 32%;
+          right: 6%;
+          animation-delay: 2s;
+        }
+        .phone-heart-3 {
+          bottom: 18%;
+          left: 10%;
+          animation-delay: 4s;
+        }
+        .phone-heart-4 {
+          bottom: 10%;
+          right: 8%;
+          animation-delay: 6s;
+        }
         .header {
           flex-shrink: 0;
           background: linear-gradient(135deg, rgba(254, 243, 199, 0.8), rgba(253, 230, 138, 0.8));
@@ -473,11 +555,17 @@ export default function Wishes() {
           z-index: 0;
         }
         .header-content {
-          padding: 32px 20px 28px;
+          padding: 28px 20px 24px;
           text-align: center;
           position: relative;
           z-index: 1;
         }
+        .back-row {
+          display: flex;
+          justify-content: flex-start;
+          margin-bottom: 12px;
+        }
+        /* back link now uses global .back-pill style from _app.js */
         .phone .back-button,
         .back-button {
           position: absolute !important;

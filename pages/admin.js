@@ -84,6 +84,37 @@ export default function Admin() {
     }
   };
 
+  const deleteWish = async (id) => {
+    const storedPass = typeof window !== 'undefined' ? localStorage.getItem('adminPass') : '';
+
+    if (!confirm('Are you sure you want to delete this wish? This cannot be undone.')) {
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/delete', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ pass: storedPass, id }),
+      });
+
+      if (response.ok) {
+        setWishes((prev) => prev.filter((w) => w.id !== id));
+      } else {
+        alert('Failed to delete wish. Please login again.');
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('adminPass');
+        }
+        setAuthenticated(false);
+      }
+    } catch (err) {
+      alert('Error deleting wish');
+      console.error('Error:', err);
+    }
+  };
+
   if (!authenticated) {
     return (
       <>
@@ -171,7 +202,7 @@ export default function Admin() {
       </Head>
       <div className="container">
         <div className="admin-container">
-          <Link href="/wishes" className="back-button">
+          <Link href="/wishes" className="back-pill">
             <span>← Back to Wishes</span>
           </Link>
           <h1>Admin Panel</h1>
@@ -188,12 +219,15 @@ export default function Admin() {
                     {(wish.position || wish.team) && <div className="wish-team">{wish.position || wish.team}</div>}
                     <div className="wish-message">{wish.message}</div>
                   </div>
-                  <div>
+                  <div className="wish-actions">
                     <span className={`status ${wish.visible ? 'on' : 'off'}`}>
                       {wish.visible ? 'ON' : 'OFF'}
                     </span>
                     <button className="toggle-btn" onClick={() => toggleWish(wish.id)}>
                       Toggle
+                    </button>
+                    <button className="delete-btn" onClick={() => deleteWish(wish.id)}>
+                      Delete
                     </button>
                   </div>
                 </div>
@@ -226,27 +260,7 @@ export default function Admin() {
           padding-top: 20px;
           color: #1f2937;
         }
-        .back-button {
-          display: inline-block;
-          padding: 12px 24px;
-          background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-          color: #475569;
-          text-decoration: none;
-          border-radius: 10px;
-          font-size: 14px;
-          font-weight: 600;
-          margin-bottom: 32px;
-          transition: all 0.3s ease;
-          border: 2px solid #e2e8f0;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-        .back-button:hover {
-          background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-          color: #1e293b;
-          border-color: #cbd5e1;
-          transform: translateX(-3px);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+        /* back button now uses global .back-pill style from _app.js */
         .wish-item {
           padding: 20px;
           margin-bottom: 15px;
@@ -294,7 +308,13 @@ export default function Admin() {
           background: #fee2e2;
           color: #991b1b;
         }
-        .toggle-btn {
+        .wish-actions {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .toggle-btn,
+        .delete-btn {
           padding: 8px 16px;
           background: #3b82f6;
           color: #fff;
@@ -305,6 +325,12 @@ export default function Admin() {
         }
         .toggle-btn:hover {
           background: #2563eb;
+        }
+        .delete-btn {
+          background: #dc2626;
+        }
+        .delete-btn:hover {
+          background: #b91c1c;
         }
         .loading {
           text-align: center;
