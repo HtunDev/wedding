@@ -102,11 +102,6 @@ export default function Wishes() {
           </div>
           <div className="header">
             <div className="header-content">
-              <div className="back-row">
-                <Link href="/" className="back-pill">
-                  <span>← Back</span>
-                </Link>
-              </div>
               <div className="badge-wrapper">
                 <div className="couple-icon">
                   <svg viewBox="0 0 120 120" className="couple-svg">
@@ -218,14 +213,19 @@ export default function Wishes() {
             )}
           </div>
           <div className="footer">
-            <Link href="/add-wish" className="submit-link">
-              <button className="submit-button" type="button">
-                <span>+ Send Your Wish</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </button>
-            </Link>
+            <div className="footer-actions">
+              <Link href="/" className="back-pill footer-back">
+                <span>←</span>
+              </Link>
+              <Link href="/add-wish" className="submit-link">
+                <button className="submit-button" type="button">
+                  <span>+ Send Your Wish</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -699,21 +699,21 @@ export default function Wishes() {
           opacity: 0.6;
         }
         .names {
-          margin: 18px 0;
+          margin: 4px 0;
           font-weight: 700;
-          font-size: 22px;
+          font-size: 16px;
           background: linear-gradient(135deg, #dc2626, #b91c1c, #991b1b);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-          line-height: 1.4;
-          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          line-height: 1.25;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         .divider-wrapper {
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 22px 0;
+          margin: 10px 0 14px;
         }
         .divider {
           width: 80px;
@@ -735,7 +735,7 @@ export default function Wishes() {
         .wishes-container {
           flex: 1;
           overflow-y: auto;
-          padding: 28px 24px;
+          padding: 18px 20px;
           background: #ffffff;
           -webkit-overflow-scrolling: touch;
         }
@@ -754,19 +754,14 @@ export default function Wishes() {
         }
         .wishes-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-          gap: 20px;
-          padding-bottom: 10px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 16px;
+          padding-bottom: 8px;
         }
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
           .wishes-grid {
             grid-template-columns: 1fr;
-            gap: 16px;
-          }
-        }
-        @media (min-width: 641px) and (max-width: 768px) {
-          .wishes-grid {
-            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
           }
         }
         .wish-card {
@@ -775,8 +770,8 @@ export default function Wishes() {
             rgba(254, 243, 199, 0.5));
           backdrop-filter: blur(20px) saturate(180%);
           -webkit-backdrop-filter: blur(20px) saturate(180%);
-          border-radius: 20px;
-          padding: 24px;
+          border-radius: 18px;
+          padding: 18px;
           box-shadow: 
             0 8px 24px rgba(220, 38, 38, 0.1),
             0 2px 8px rgba(251, 191, 36, 0.15),
@@ -788,7 +783,7 @@ export default function Wishes() {
           opacity: 0;
           display: flex;
           flex-direction: column;
-          min-height: 160px;
+          min-height: 130px;
           position: relative;
           cursor: pointer;
         }
@@ -923,15 +918,45 @@ export default function Wishes() {
           font-weight: 400;
         }
         .footer {
-          padding: 22px 24px;
-          text-align: center;
+          padding: 18px 20px 30px;
           background: linear-gradient(135deg, rgba(254, 243, 199, 0.6), rgba(253, 230, 138, 0.6));
           flex-shrink: 0;
           border-top: 2px solid rgba(251, 191, 36, 0.3);
         }
+        .footer-actions {
+          display: flex !important;
+          flex-direction: row !important;
+          gap: 10px;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          box-sizing: border-box;
+        }
+        .footer-back {
+          flex-shrink: 0 !important;
+          flex-grow: 0 !important;
+          width: 64px !important;
+          min-width: 64px !important;
+          max-width: 64px !important;
+          height: 48px !important;
+          display: flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          box-sizing: border-box !important;
+        }
+        .footer-back.back-pill {
+          padding: 12px 10px !important;
+          border-radius: 50px !important;
+        }
         .submit-link {
           text-decoration: none !important;
-          display: block;
+          display: block !important;
+          flex: 0 0 auto !important;
+          min-width: 0 !important;
+          margin: 0 !important;
+          box-sizing: border-box !important;
         }
         .submit-link:hover {
           text-decoration: none !important;
@@ -946,7 +971,9 @@ export default function Wishes() {
           text-decoration: none !important;
         }
         .submit-button {
-          width: 100%;
+          width: 780px !important;
+          max-width: 100% !important;
+          box-sizing: border-box !important;
           padding: 16px 24px;
           background: linear-gradient(135deg, #dc2626, #b91c1c);
           color: #fff;
@@ -981,6 +1008,29 @@ export default function Wishes() {
         }
         .submit-button:hover svg {
           transform: translateX(3px);
+        }
+        /* Mobile/tablet: back button narrow, add wish fills remaining space */
+        @media (max-width: 768px) {
+          .footer-actions {
+            justify-content: flex-start;
+            padding: 0 12px;
+            gap: 10px;
+          }
+          .footer-back {
+            flex: 0 0 auto !important;
+            width: 64px !important;
+            min-width: 64px !important;
+            max-width: 64px !important;
+          }
+          .submit-link {
+            flex: 1 1 0% !important;
+            min-width: 0 !important;
+            width: auto !important;
+          }
+          .submit-button {
+            width: 100% !important;
+            max-width: 100% !important;
+          }
         }
         .submit-btn-link {
           text-decoration: none;
